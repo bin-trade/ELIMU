@@ -142,6 +142,24 @@ button:active{transform:scale(.97)}
 @media (hover:hover) and (pointer:fine){button:hover:not(:disabled){transform:translateY(-1px)}}
 @media(prefers-reduced-motion:reduce){.card{animation:none}.announcement-item summary::after{transition:none}.card,button{transition:none}.card:hover,button:hover:not(:disabled){transform:none}}
 
+/* Mobile first : l'identité reste lisible et les données restent dans l'écran. */
+.topbar-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex:0 0 auto;min-width:0}.topbar-actions .portal-back,.topbar-actions .topbar-action{width:auto;margin:0}.topbar-actions .status-pill{display:inline-flex;align-items:center}
+.fee-grid,.fee-grid-row{min-width:0}.fee-grid-row>*{min-width:0}.fee-value{overflow-wrap:anywhere;word-break:break-word}
+@media(max-width:680px){
+  header.topbar{flex-wrap:wrap;align-items:center;padding:10px 12px;gap:9px}
+  header.topbar .titles{flex:1 1 0;min-width:0}
+  header.topbar h1{max-width:100%;font-size:16px}
+  header.topbar small#app-subtitle{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar-actions{order:3;flex:1 0 100%;justify-content:flex-end;padding-left:59px}
+  .topbar-actions .portal-back,.topbar-actions .topbar-action{flex:0 0 auto;padding:8px 11px}
+  .topbar-actions .status-pill{margin-left:auto}
+  .fee-grid{grid-template-columns:minmax(0,1.18fr) repeat(3,minmax(0,.82fr));gap:6px;font-size:11px}
+  .fee-grid-head{padding:0 7px 5px;font-size:9px;letter-spacing:.02em}
+  .fee-grid-row{padding:9px 7px;margin-top:6px}
+  .fee-value{font-size:10px;line-height:1.25}
+  .fee-value .meta{font-size:9px;line-height:1.15}
+}
+
 /* Frais connexes : grille lisible et stable pendant les actualisations. */
 .fee-breakdown{margin-top:16px}.fee-breakdown h3{margin:0 0 12px;color:var(--primary);font-size:18px}.fee-grid{display:grid;grid-template-columns:minmax(150px,1.3fr) repeat(3,minmax(100px,1fr));gap:10px 16px;align-items:center}.fee-grid-head{padding:0 14px 6px;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:.06em}.fee-grid-head span:not(:first-child),.fee-value{text-align:right}.fee-grid-row{padding:11px 14px;margin-top:7px;border:1px solid var(--border);border-radius:10px;background:rgba(248,250,253,.82)}.fee-grid-row strong{color:var(--primary);overflow-wrap:anywhere}.fee-value{font-variant-numeric:tabular-nums}.fee-paid,.fee-clear{color:#147e4d;font-weight:700}.fee-balance{color:#b94035;font-weight:700}.fee-value .meta{display:block;text-align:right;font-weight:400}.fee-empty{padding:8px 0}
 @media(max-width:680px){.fee-grid{grid-template-columns:minmax(110px,1.15fr) repeat(3,minmax(72px,1fr));gap:7px;font-size:12px}.fee-grid-head{padding-left:8px;padding-right:8px;font-size:10px}.fee-grid-row{padding:9px 8px}.fee-value{font-size:11px}}

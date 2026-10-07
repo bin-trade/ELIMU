@@ -7,14 +7,16 @@
 <meta name="theme-color" content="#1a3d7c">
 <link rel="icon" href="../assets/school-logo.png">
 <link rel="apple-touch-icon" href="../assets/school-logo.png">
-    <link rel="stylesheet" href="./styles.css?v=20261007-order">
+    <link rel="stylesheet" href="./styles.css?v=20261007-mobile">
 </head>
 <body>
 <header class="topbar">
 <img src="../assets/school-logo.png" alt="Logo" onerror="this.src='../assets/static/elimu-logo.png'">
   <div class="titles"><h1 id="school-name">Établissement scolaire</h1><small id="app-subtitle">Espace professeur · classes et élèves</small><small class="brand-mark">ELIMU</small></div>
-  <a class="portal-back" href="../" aria-label="Retour au choix des portails">← Portails</a>
-  <span id="status-pill" class="status-pill offline">Hors ligne</span>
+  <div class="topbar-actions">
+    <a class="portal-back" href="../" aria-label="Retour au choix des portails">← Portails</a>
+    <span id="status-pill" class="status-pill offline">Hors ligne</span>
+  </div>
 </header>
 <section id="professor-gate" class="professor-gate" aria-labelledby="professor-gate-title">
   <div class="card gate-card"><h2 id="professor-gate-title">Accès professeur</h2><p>Entrez le code d'accès de cet espace.</p><label for="portal-access-code">Code d'accès</label><input id="portal-access-code" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><button type="button" onclick="App.unlockPortal()">Ouvrir l'espace professeur</button><div id="portal-access-error" class="err-box hidden">Code incorrect.</div></div>

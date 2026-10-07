@@ -99,6 +99,22 @@ button:active,.tag-btn:active{transform:scale(.97)}
 @keyframes elimu-prof-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media (hover:hover) and (pointer:fine){button:hover:not(:disabled){transform:translateY(-1px)}}
 @media(prefers-reduced-motion:reduce){.card,.class-group{animation:none}.class-group summary{transition:none}.card,button{transition:none}.card:hover,button:hover:not(:disabled){transform:none}}
+.topbar-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex:0 0 auto;min-width:0}.topbar-actions .portal-back{width:auto;margin:0}.topbar-actions .status-pill{display:inline-flex;align-items:center}
+.fee-grid,.fee-grid-row{min-width:0}.fee-grid-row>*{min-width:0}.fee-value{overflow-wrap:anywhere;word-break:break-word}
+@media(max-width:680px){
+  header.topbar{flex-wrap:wrap;align-items:center;padding:10px 12px;gap:9px}
+  header.topbar .titles{flex:1 1 0;min-width:0}
+  header.topbar h1{max-width:100%;font-size:16px}
+  header.topbar small#app-subtitle{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar-actions{order:3;flex:1 0 100%;justify-content:flex-end;padding-left:59px}
+  .topbar-actions .portal-back{flex:0 0 auto;padding:8px 11px}
+  .topbar-actions .status-pill{margin-left:auto}
+  .fee-grid{grid-template-columns:minmax(0,1.18fr) repeat(3,minmax(0,.82fr));gap:6px;font-size:11px}
+  .fee-grid-head{padding:0 7px 5px;font-size:9px;letter-spacing:.02em}
+  .fee-grid-row{padding:9px 7px;margin-top:6px}
+  .fee-value{font-size:10px;line-height:1.25}
+  .fee-value .meta{font-size:9px;line-height:1.15}
+}
 .class-level-group{margin:8px 0;border:1px solid var(--border);border-radius:9px;overflow:hidden}.class-level-group>summary{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;padding:10px 12px;background:#f8fafc;color:var(--primary);font-weight:750;list-style:none}.class-level-group>summary::-webkit-details-marker{display:none}.class-level-group[open]>summary{background:#edf4fb}.class-level-group .class-group-list{padding:0 8px 8px}.class-level-group .list-item{border-bottom:1px solid var(--border)}
 
 /* Frais connexes : mêmes colonnes que dans le portail parent. */
