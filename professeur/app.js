@@ -130,12 +130,13 @@ const App = {
     const order = ["MATERNELLE", "PRIMAIRE", "SECONDAIRE"];
     const classes = this.activeClasses();
     const categoryName = (c) => String(c.categorie || c.category || "").toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const natural = (c) => { const label = String(c.niveau || c.level || c.nom || ""); const match = label.match(/\d+/); return [match ? Number(match[0]) : 999, label.toLocaleLowerCase("fr"), String(c.section || "")]; };
+    const levelLabel = (c) => { let label = String(c.niveau || c.level || c.nom || "").trim(); if (["MATERNELLE", "PRIMAIRE", "SECONDAIRE"].includes(categoryName(c))) label = label.replace(/\s+[A-Z]$/i, "").trim(); return label || "Non classé"; };
+    const natural = (c) => { const label = levelLabel(c); const match = label.match(/\d+/); return [match ? Number(match[0]) : 999, label.toLocaleLowerCase("fr"), String(c.section || "")]; };
     return order.map((category) => {
       const grouped = classes.filter((c) => categoryName(c) === category)
         .sort((a, b) => { const ak = natural(a), bk = natural(b); return ak[0] - bk[0] || ak[1].localeCompare(bk[1], "fr") || ak[2].localeCompare(bk[2], "fr"); });
       const levels = {};
-      grouped.forEach((c) => { const level = String(c.niveau || c.level || "Non classé"); (levels[level] ||= []).push(c); });
+      grouped.forEach((c) => { const level = levelLabel(c); (levels[level] ||= []).push(c); });
       return { category, classes: grouped, levels: Object.keys(levels).sort((a, b) => natural({ niveau: a })[0] - natural({ niveau: b })[0] || a.localeCompare(b, "fr")).map((level) => ({ level, classes: levels[level] })) };
     }).filter((g) => g.classes.length);
   },
