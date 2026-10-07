@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portails ELIMU</title>
+  <meta name="theme-color" content="#102b57">
+  <link rel="icon" href="./assets/school-logo.png">
+  <link rel="stylesheet" href="./portal.css?v=20261007-order">
+</head>
+<body class="portal-launcher">
+  <div class="identity-splash" aria-hidden="true"><img src="./assets/school-logo.png" alt=""></div>
+  <header>
+    <img class="launcher-logo" src="./assets/school-logo.png" alt="Logo de l'établissement" onerror="this.src='./assets/static/elimu-logo.png'">
+    <div class="launcher-identity"><strong id="school-name">Portails ELIMU</strong><small>Accédez à l’espace de votre établissement</small></div>
+  </header>
+  <main>
+    <section class="launcher-hero"><p class="launcher-kicker">Bienvenue</p><h1>Choisissez votre espace</h1><p>Chaque espace donne accès aux informations et outils adaptés à votre rôle.</p></section>
+    <section class="launcher-grid" aria-label="Portails disponibles">
+      <a class="portal-choice portal-choice-parent" href="./parent/" aria-label="Ouvrir le portail parents"><img src="./assets/static/PARENT.png" alt="Portail parents"></a>
+      <a class="portal-choice portal-choice-teacher" href="./professeur/" aria-label="Ouvrir le portail professeur"><img src="./assets/static/PROF.png" alt="Portail professeur"></a>
+      <a class="portal-choice portal-choice-owner" href="./proprietaire/" aria-label="Ouvrir le portail propriétaire"><img src="./assets/static/PROPRIO.png" alt="Portail proprio"></a>
+    </section>
+    <p class="launcher-note">Utilisez uniquement l'espace correspondant à votre rôle.</p>
+  </main>
+  <script src="./config.js?v=20261007-portal"></script>
+  <script>
+    (async function () { try { const r = await fetch(window.ELIMU_APPS_SCRIPT_URL + '?action=publicConfig'); const j = await r.json(); const i = j.etablissement || (j.data && j.data.etablissement) || {}; if (i.nom || i.name) document.getElementById('school-name').textContent = i.nom || i.name; } catch (_) {} }());
+  </script>
+</body>
+</html>

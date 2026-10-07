@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Établissement scolaire — Espace direction</title>
+    <link rel="icon" href="../assets/school-logo.png">
+  <link rel="stylesheet" href="../portal.css?v=20261007-motion">
+  <style>
+    :root{--owner-accent:#c99522;--owner-ink:#17386f}
+    body{background:#f4f6fa;color:#17304f}
+    .owner-header{display:flex;align-items:center;gap:14px;padding:18px 22px;background:#173d79;color:#fff;border-bottom:4px solid var(--owner-accent)}
+    .owner-header img{width:54px;height:54px;object-fit:contain;border-radius:12px;background:#fff;padding:4px}
+    .owner-header strong{display:block;font-size:1.15rem}.owner-header small{display:block;margin-top:4px;opacity:.82}.portal-back{margin-left:auto;color:#fff;text-decoration:none;font-size:.82rem;font-weight:700;padding:8px 10px;border:1px solid rgba(255,255,255,.45);border-radius:8px;white-space:nowrap}.portal-back:hover{background:rgba(255,255,255,.14)}
+    .owner-shell{max-width:1240px;margin:24px auto;padding:0 18px}
+    .owner-block{margin:14px 0;overflow:hidden;border:1px solid #dce3ef;border-radius:14px;background:#fff;box-shadow:0 5px 18px rgba(17,49,91,.06)}
+    .owner-block>summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:800;color:var(--owner-ink);display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .owner-block>summary::-webkit-details-marker{display:none}.owner-block>summary:after{content:'+';font-size:1.35rem;color:var(--owner-accent)}
+    .owner-block[open]>summary:after{content:'−'}.owner-block>summary small{display:block;margin-top:4px;font-weight:500;color:#71809a}
+    .owner-content{padding:0 20px 20px;border-top:1px solid #edf0f5}.owner-content h3{margin:18px 0 10px;color:var(--owner-ink);font-size:1rem}
+    .metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;padding-top:18px}
+    .metric{border:1px solid #dce3ef;border-top:3px solid var(--owner-accent);border-radius:10px;padding:14px;background:#fbfcfe;min-width:0}.metric b{display:block;font-size:clamp(1.05rem,1.8vw,1.35rem);line-height:1.15;color:var(--owner-ink);margin-top:6px;overflow-wrap:anywhere}.metric span{font-size:.83rem;color:#687891}
+    .category-block{border:1px solid #e3e8f0;border-radius:10px;margin:12px 0;overflow:hidden}.category-block summary{cursor:pointer;padding:12px 14px;font-weight:800;color:#234981;background:#f8fafc}.category-block .table-wrap{border-top:1px solid #e3e8f0}.category-block>summary{display:flex;justify-content:space-between;align-items:center}.group-count{color:#71809a;font-weight:600}.level-stack{padding:0 12px 8px}.class-level-block{margin:10px 0;border:1px solid #e3e8f0;border-radius:9px;overflow:hidden}.class-level-block>summary{cursor:pointer;padding:11px 13px;font-weight:750;color:#315487;background:#fbfcfe;display:flex;justify-content:space-between;align-items:center}.class-level-block[open]>summary{background:#f1f6fc}.class-level-block .table-wrap{border-top:1px solid #e3e8f0}
+    .table-wrap{overflow:auto}table{width:100%;min-width:680px;border-collapse:collapse;font-size:.88rem}th,td{padding:10px 12px;border-bottom:1px solid #edf0f5;text-align:left;vertical-align:top}th{background:#f8fafc;color:#5a6b84;font-size:.76rem;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}tr:last-child td{border-bottom:0}.num{text-align:right;white-space:nowrap}.muted{color:#71809a}.empty{padding:22px;color:#71809a;text-align:center}
+    .filter-row{display:flex;gap:9px;flex-wrap:wrap;padding:16px 0 12px}.filter-row input,.filter-row select{flex:1 1 190px;min-width:0;box-sizing:border-box;padding:10px 11px;border:1px solid #cbd6e6;border-radius:8px;background:#fff;color:#17304f;font:inherit}.filter-row input:focus,.filter-row select:focus{outline:3px solid rgba(23,59,115,.14);border-color:#173d79}
+    .status{display:inline-flex;padding:3px 8px;border-radius:99px;background:#edf7ef;color:#18733a;font-size:.75rem;font-weight:700}.status.bad{background:#fff0ef;color:#b33b31}
+    .owner-fee-list{display:grid;gap:4px;min-width:270px}.owner-fee-row{display:grid;grid-template-columns:minmax(92px,1.25fr) repeat(3,minmax(68px,1fr));gap:6px;align-items:center;font-size:.78rem}.owner-fee-row span:not(:first-child){text-align:right;white-space:nowrap}.owner-fee-row .fee-paid{color:#18733a;font-weight:700}.owner-fee-row .fee-balance{color:#b33b31;font-weight:700}.owner-fee-row .fee-clear{color:#18733a;font-weight:700}
+    .login-card{max-width:520px;margin:50px auto}.login-card h1{margin-top:0;color:var(--owner-ink)}.login-card p{color:#6b7b92}.login-card label{display:block;margin:14px 0 6px;font-weight:700}.login-card input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #cbd6e6;border-radius:8px;font-size:1rem}.login-card button{margin-top:16px}.error{margin-top:12px;padding:10px;border-radius:8px;background:#fff0ef;color:#b33b31}.hidden{display:none!important}.button-loading{display:inline-flex;align-items:center;justify-content:center;gap:9px;cursor:wait;opacity:.88}.button-spinner{display:none;width:15px;height:15px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:button-spin .7s linear infinite}.button-loading .button-spinner{display:inline-block}@keyframes button-spin{to{transform:rotate(360deg)}}
+    @media(max-width:650px){.owner-shell{padding:0 10px;margin-top:14px}.owner-block>summary{padding:15px}.owner-content{padding:0 12px 14px}.owner-header{padding:14px}.owner-header img{width:46px;height:46px}}
+    /* Direction artistique ELIMU — espace direction */
+    :root{--owner-ink:#102f63;--owner-accent:#c9a044}html{scroll-behavior:smooth}body{font-family:"Segoe UI Variable","Aptos","Segoe UI",system-ui,sans-serif;background:radial-gradient(circle at 8% -8%,rgba(201,160,68,.14),transparent 30%),radial-gradient(circle at 94% 5%,rgba(28,75,143,.11),transparent 34%),#f2f5fa;color:#172b49}body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.23;background:linear-gradient(125deg,transparent 0 68%,rgba(18,53,111,.05) 68% 68.35%,transparent 68.35%)}
+    .owner-header{position:relative;max-width:none;padding:18px max(20px,calc((100% - 1240px)/2));background:linear-gradient(115deg,#0d2b5b,#174784 62%,#1b4d8d);border-bottom:3px solid var(--owner-accent);box-shadow:0 10px 28px rgba(12,42,87,.18)}.owner-header:before{content:"";width:5px;height:38px;background:var(--owner-accent);border-radius:6px;box-shadow:0 0 18px rgba(201,160,68,.48)}.owner-header img{width:60px;height:60px;border-radius:13px;box-shadow:0 0 0 1px rgba(255,255,255,.35),0 7px 16px rgba(4,22,53,.2)}
+    .owner-shell{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:30px 24px 70px}.owner-block,.login-card,.toolbar{border-color:rgba(181,197,220,.72);border-radius:16px;box-shadow:0 12px 32px rgba(22,51,92,.065)}.owner-block{transition:border-color .2s,box-shadow .2s}.owner-block:hover{border-color:#c4d2e5;box-shadow:0 16px 36px rgba(22,51,92,.09)}.owner-block>summary{padding:20px 22px}.owner-block>summary:after{font-size:1.5rem}.owner-content{padding:0 22px 22px}.toolbar{align-items:center;background:rgba(255,255,255,.9);backdrop-filter:blur(12px)}.login-card{margin:52px auto;padding:28px}.login-card h1{font-size:28px;letter-spacing:-.035em}.login-card button{border-radius:10px;box-shadow:0 7px 16px rgba(18,53,111,.16)}
+    .metric{border-radius:12px;background:#fbfcfe;box-shadow:inset 0 0 0 1px rgba(18,53,111,.02)}.category-block{border-color:#cbd9e9;border-radius:13px}.category-block summary{padding:14px 16px;background:linear-gradient(90deg,#f8fafc,#fff)}.filter-row input,.filter-row select{border-radius:10px;padding:12px 13px}.filter-row input:focus,.filter-row select:focus{outline:3px solid rgba(201,160,68,.22);border-color:var(--owner-ink)}th{background:#f4f7fb}tr:hover td{background:#fafcff}.status{letter-spacing:.02em}
+    @media(max-width:650px){.owner-shell{padding:20px 12px 50px}.owner-content{padding:0 14px 16px}.login-card{margin:28px auto;padding:20px}.owner-header{padding:14px 16px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.owner-block,button{transition:none}.owner-block:hover,button:hover{transform:none}}
+    /* Mouvement ELIMU : ouverture lisible des blocs direction et feedback des actions. */
+    :root{--motion-ease-out:cubic-bezier(.23,1,.32,1);--motion-fast:140ms;--motion-panel:220ms}
+    .owner-block,.metric,.login-card,.toolbar{animation:elimu-owner-enter var(--motion-panel) var(--motion-ease-out) both}
+    .owner-block:nth-of-type(2),.metric:nth-child(2){animation-delay:35ms}.owner-block:nth-of-type(3),.metric:nth-child(3){animation-delay:70ms}.owner-block:nth-of-type(4),.metric:nth-child(4){animation-delay:105ms}
+    .owner-block>summary:after{transition:transform var(--motion-fast) var(--motion-ease-out)}
+    .owner-block[open]>summary:after{transform:rotate(45deg)}
+    button:active{transform:scale(.97)}
+    @keyframes elimu-owner-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    @media (hover:hover) and (pointer:fine){button:hover:not(:disabled){transform:translateY(-1px)}}
+    @media(prefers-reduced-motion:reduce){.owner-block,.metric,.login-card,.toolbar{animation:none}.owner-block>summary:after{transition:none}button:active,button:hover{transform:none}}
+  </style>
+</head>
+<body>
+  <header class="owner-header">
+    <img id="owner-logo" src="../assets/school-logo.png" alt="Logo de l'établissement" onerror="this.src='../assets/static/elimu-logo.png'">
+    <div><strong id="school-name">Établissement scolaire</strong><small id="owner-subtitle">Espace direction · consultation complète</small></div>
+    <a class="portal-back" href="../" aria-label="Retour au choix des portails">← Portails</a>
+  </header>
+
+  <main class="owner-shell">
+    <section id="login-card" class="card login-card">
+      <h1>Accès direction</h1>
+      <p>Entrez le code propriétaire pour consulter les données complètes de l’établissement.</p>
+      <form id="login-form">
+        <label for="owner-code">Code d’accès</label>
+        <input id="owner-code" type="password" autocomplete="current-password" required>
+        <button id="owner-submit" class="primary" type="submit"><span class="button-label">Ouvrir le tableau de bord</span><span class="button-spinner" aria-hidden="true"></span></button>
+        <div id="login-error" class="error hidden"></div>
+      </form>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <div class="toolbar card"><div><strong id="dashboard-title">Tableau de bord direction</strong><div class="muted" id="snapshot-date"></div></div><button id="logout" type="button">Verrouiller</button></div>
+      <details class="owner-block" open><summary><span>Synthèse de l’établissement<small>Vue d’ensemble des principaux indicateurs</small></span></summary><div class="owner-content"><div id="metrics" class="metric-grid"></div></div></details>
+      <details class="owner-block"><summary><span>Classes et effectifs<small>Organisation par maternelle, primaire et secondaire</small></span></summary><div class="owner-content" id="classes-area"></div></details>
+      <details class="owner-block"><summary><span>Élèves et situation financière<small>Identité, classe, frais scolaires et autres frais</small></span></summary><div class="owner-content"><div class="filter-row"><input id="student-search" placeholder="Rechercher un élève ou un matricule"><select id="student-class"><option value="">Toutes les classes</option></select><select id="student-status"><option value="">Tous les statuts</option></select></div><div class="table-wrap" id="students-area"></div></div></details>
+      <details class="owner-block"><summary><span>Enseignants et salaires<small>Personnel et total des versements enregistrés</small></span></summary><div class="owner-content"><div class="filter-row"><input id="teacher-search" placeholder="Rechercher un enseignant, code ou téléphone"></div><div class="table-wrap" id="teachers-area"></div></div></details>
+      <details class="owner-block"><summary><span>Paiements des élèves<small>Historique détaillé des paiements publiés</small></span></summary><div class="owner-content"><div class="filter-row"><input id="payment-search" placeholder="Rechercher un élève, une classe, un type ou une référence"></div><div class="table-wrap" id="payments-area"></div></div></details>
+      <details class="owner-block"><summary><span>Recettes<small>Recettes enregistrées dans la feuille correspondante</small></span></summary><div class="owner-content"><div class="filter-row"><input id="receipt-search" placeholder="Rechercher une recette ou une date"></div><div class="table-wrap" id="receipts-area"></div></div></details>
+      <details class="owner-block"><summary><span>Dépenses<small>Dépenses enregistrées dans la feuille correspondante</small></span></summary><div class="owner-content"><div class="filter-row"><input id="expense-search" placeholder="Rechercher une dépense ou une date"></div><div class="table-wrap" id="expenses-area"></div></div></details>
+      <details class="owner-block"><summary><span>Versements de salaires<small>Détail des salaires dus et payés</small></span></summary><div class="owner-content"><div class="filter-row"><input id="salary-search" placeholder="Rechercher un professeur ou une période"></div><div class="table-wrap" id="salaries-area"></div></div></details>
+    </section>
+  </main>
+
+  <script src="../online-only.js?v=20261006-2"></script>
+  <script src="../config.js?v=20261007-central"></script>
+  <script src="./config.js?v=20261006-2"></script>
+  <script>
+  (()=>{
+    const $=s=>document.querySelector(s), esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const arr=v=>Array.isArray(v)?v:[], num=v=>Number(v)||0;
+    const money=(v,c='USD')=>num(v).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})+' '+esc(c||'USD');
+    const dateFmt=v=>{if(!v)return '—';const d=new Date(v);if(Number.isNaN(d.getTime()))return esc(v);return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear()+' à '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0')};
+    const status=v=>'<span class="status '+(String(v||'').toUpperCase().includes('ANN')?'bad':'')+'">'+esc(v||'—')+'</span>';
+    const table=(heads,rows)=>rows.length?'<table><thead><tr>'+heads.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table>':'<div class="empty">Aucune donnée disponible.</div>';
+    const wireFilter=(inputId,areaId,extra)=>{const input=$('#'+inputId),area=$('#'+areaId);if(!input||!area)return;const update=()=>{const term=input.value.trim().toLowerCase();area.querySelectorAll('tbody tr').forEach(row=>{const extraOk=!extra||extra(row);row.hidden=!extraOk||(term&&!String(row.dataset.search||row.textContent).toLowerCase().includes(term))})};input.addEventListener('input',update);return update};
+    const categoryOrder=['MATERNELLE','PRIMAIRE','SECONDAIRE','AUTRES'];
+    const levelKey=c=>{const label=String(c.niveau||c.level||c.nom||c.name||'');const m=label.match(/\d+/);return [m?Number(m[0]):999,label.toLocaleLowerCase('fr')];};
+    const classCompare=(a,b)=>{const ak=levelKey(a),bk=levelKey(b);return ak[0]-bk[0]||ak[1].localeCompare(bk[1],'fr')||String(a.section||'').localeCompare(String(b.section||''),'fr')||String(a.nom||a.name||'').localeCompare(String(b.nom||b.name||''),'fr');};
+    const groupByCategory=classes=>{const groups={};arr(classes).forEach(c=>{const key=String(c.categorie||c.category||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');const k=categoryOrder.find(x=>key.includes(x))||'AUTRES';(groups[k]??=[]).push(c)});return categoryOrder.filter(k=>groups[k]?.length).map(category=>({category,classes:groups[category].sort(classCompare)}));};
+    const groupByLevel=classes=>{const groups={};classes.forEach(c=>{const label=String(c.niveau||c.level||'Non classé');(groups[label]??=[]).push(c)});return Object.keys(groups).sort((a,b)=>{const ak=levelKey({niveau:a}),bk=levelKey({niveau:b});return ak[0]-bk[0]||ak[1].localeCompare(bk[1],'fr')}).map(level=>({level,classes:groups[level]}));};
+    function render(d){
+      const s=d.synthese||{}, e=d.etablissement||{}; applyBranding(e); const schoolName=e.school_name||'Établissement scolaire'; $('#dashboard-title').textContent=schoolName+' · tableau de bord'; $('#snapshot-date').textContent='Snapshot : '+dateFmt(d.snapshot&&d.snapshot.generatedAt);
+      $('#metrics').innerHTML=[['Élèves',s.eleves],['Enseignants',s.enseignants],['Classes',s.classes],['Paiements',money(s.paiements,e.currency)],['Recettes',money(s.recettes,e.currency)],['Dépenses',money(s.depenses,e.currency)],['Salaires',money(s.salaires,e.currency)]].map(x=>'<div class="metric"><span>'+x[0]+'</span><b>'+esc(x[1])+'</b></div>').join('');
+      const de=d.details||{}; const groups=groupByCategory(arr(de.classes||d.classes)); $('#classes-area').innerHTML=groups.map(g=>'<details class="category-block" open><summary>'+esc(g.category)+' <span class="group-count">('+g.classes.length+')</span></summary><div class="level-stack">'+groupByLevel(g.classes).map(l=>'<details class="class-level-block"><summary>'+esc(l.level)+' <span class="group-count">('+l.classes.length+')</span></summary><div class="table-wrap">'+table(['Classe','Niveau','Section','Effectif'],l.classes.map(c=>'<tr><td>'+esc(c.nom||c.name)+'</td><td>'+esc(c.niveau||c.level)+'</td><td>'+esc(c.section)+'</td><td class="num">'+esc(c.effectif??c.eleves??0)+'</td></tr>'))+'</div></details>').join('')+'</div></details>').join('')||'<div class="empty">Aucune classe.</div>';
+      const classes=[...new Set(arr(de.eleves).map(x=>x.classe).filter(Boolean))].sort();$('#student-class').innerHTML='<option value="">Toutes les classes</option>'+classes.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');const statuses=[...new Set(arr(de.eleves).map(x=>x.statut).filter(Boolean))].sort();$('#student-status').innerHTML='<option value="">Tous les statuts</option>'+statuses.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');
+      $('#students-area').innerHTML=table(['Matricule','Élève','Classe','Dû scolaire','Payé','Solde','Autres frais (dû / payé / solde)','Statut'],arr(de.eleves).map(x=>{const other=arr(x.autresFraisDetails).map(f=>'<div class="owner-fee-row"><span>'+esc(f.type)+'</span><span>'+money(f.du,x.devise||e.currency)+'</span><span class="fee-paid">'+money(f.paye,x.devise||e.currency)+'</span><span class="'+(num(f.solde)>0?'fee-balance':'fee-clear')+'">'+money(f.solde,x.devise||e.currency)+'</span></div>').join('')||money(x.autresFrais,x.devise||e.currency);return '<tr data-search="'+esc([x.matricule,x.id,x.nom,x.classe,x.statut].join(' '))+'" data-class="'+esc(x.classe)+'" data-status="'+esc(x.statut)+'"><td>'+esc(x.matricule||x.id)+'</td><td>'+esc(x.nom)+'</td><td>'+esc(x.classe)+'</td><td class="num">'+money(x.du,x.devise||e.currency)+'</td><td class="num">'+money(x.paye,x.devise||e.currency)+'</td><td class="num">'+money(x.solde,x.devise||e.currency)+'</td><td><div class="owner-fee-list">'+other+'</div></td><td>'+status(x.statut)+'</td></tr>'}));
+      $('#teachers-area').innerHTML=table(['Code','Nom','Téléphone','Statut','Salaires payés'],arr(de.enseignants).map(x=>'<tr data-search="'+esc([x.id,x.nom,x.telephone,x.statut].join(' '))+'"><td>'+esc(x.id)+'</td><td>'+esc(x.nom)+'</td><td>'+esc(x.telephone)+'</td><td>'+status(x.statut)+'</td><td class="num">'+money(arr(x.salaires).reduce((a,r)=>a+num(r.montantPaye),0),e.currency)+'</td></tr>'));
+      $('#payments-area').innerHTML=table(['Date','Élève','Classe','Type','Montant','Mode','Référence','Statut'],arr(de.paiements).map(x=>'<tr data-search="'+esc([x.eleveNom,x.eleveId,x.classe,x.type,x.mode,x.reference,x.statut].join(' '))+'"><td>'+dateFmt(x.date)+'</td><td>'+esc(x.eleveNom)+'<small class="muted">'+esc(x.eleveId)+'</small></td><td>'+esc(x.classe)+'</td><td>'+esc(x.type)+'</td><td class="num">'+money(x.montant,x.devise||e.currency)+'</td><td>'+esc(x.mode)+'</td><td>'+esc(x.reference)+'</td><td>'+status(x.statut)+'</td></tr>'));
+      $('#receipts-area').innerHTML=table(['Date','Libellé','Montant','Statut'],arr(de.recettes).map(x=>'<tr data-search="'+esc([x.date,x.libelle,x.statut].join(' '))+'"><td>'+dateFmt(x.date)+'</td><td>'+esc(x.libelle)+'</td><td class="num">'+money(x.montant,x.devise||e.currency)+'</td><td>'+status(x.statut)+'</td></tr>'));
+      $('#expenses-area').innerHTML=table(['Date','Libellé','Montant','Statut'],arr(de.depenses).map(x=>'<tr data-search="'+esc([x.date,x.libelle,x.statut].join(' '))+'"><td>'+dateFmt(x.date)+'</td><td>'+esc(x.libelle)+'</td><td class="num">'+money(x.montant,x.devise||e.currency)+'</td><td>'+status(x.statut)+'</td></tr>'));
+      $('#salaries-area').innerHTML=table(['Date','Professeur','Période','Dû','Payé','Mode','Statut'],arr(de.salaires).map(x=>'<tr data-search="'+esc([x.professeurNom,x.professeurId,x.periode,x.mode,x.statut].join(' '))+'"><td>'+dateFmt(x.date)+'</td><td>'+esc(x.professeurNom||x.professeurId)+'<small class="muted">'+esc(x.professeurId)+'</small></td><td>'+esc(x.periode)+'</td><td class="num">'+money(x.montantDu,e.currency)+'</td><td class="num">'+money(x.montantPaye,e.currency)+'</td><td>'+esc(x.mode)+'</td><td>'+status(x.statut)+'</td></tr>'));
+      const studentFilter=wireFilter('student-search','students-area',row=>(!$('#student-class').value||row.dataset.class===$('#student-class').value)&&(!$('#student-status').value||row.dataset.status===$('#student-status').value));$('#student-class').onchange=studentFilter;$('#student-status').onchange=studentFilter;wireFilter('teacher-search','teachers-area');wireFilter('payment-search','payments-area');wireFilter('receipt-search','receipts-area');wireFilter('expense-search','expenses-area');wireFilter('salary-search','salaries-area');
+      $('#login-card').classList.add('hidden');$('#dashboard').classList.remove('hidden');
+    }
+    async function responseJson(response){const raw=await response.text();let json;try{json=JSON.parse(raw)}catch(_){throw new Error("Le service de l'établissement a renvoyé une réponse invalide. Vérifiez l'URL /exec et le déploiement Apps Script.")}if(!response.ok)throw new Error('Erreur réseau ('+response.status+')');return json}
+    function applyBranding(e){const schoolName=e.school_name||'Établissement scolaire';$('#school-name').textContent=schoolName;document.title=schoolName+' — Espace direction';if(e.primary_color)document.documentElement.style.setProperty('--owner-ink',e.primary_color);if(e.secondary_color)document.documentElement.style.setProperty('--owner-accent',e.secondary_color);if(e.logo_url){['owner-logo','owner-splash-logo'].forEach(id=>{const image=$('#'+id);if(image)image.src=e.logo_url})}}
+    async function load(code){const url=window.ELIMU_getAppsScriptUrl();const r=await fetch(url+'?'+new URLSearchParams({action:'ownerDashboard',code}));const j=await responseJson(r);if(!j.ok)throw new Error(j.message||j.error||'Accès refusé');return j.data||j}
+    async function loadBranding(){try{const url=window.ELIMU_getAppsScriptUrl();const r=await fetch(url+'?action=publicConfig');const j=await responseJson(r);applyBranding(j.etablissement||j.data&&j.data.etablissement||{})}catch(e){}}
+    $('#login-form').addEventListener('submit',async ev=>{ev.preventDefault();const error=$('#login-error'),btn=$('#owner-submit');if(btn.disabled)return;error.classList.add('hidden');btn.disabled=true;btn.classList.add('button-loading');btn.setAttribute('aria-busy','true');btn.querySelector('.button-label').textContent='Connexion en cours…';try{render(await load($('#owner-code').value.trim()))}catch(e){error.textContent=e.message||'Connexion impossible.';error.classList.remove('hidden')}finally{if(document.getElementById('owner-submit')===btn){btn.disabled=false;btn.classList.remove('button-loading');btn.removeAttribute('aria-busy');btn.querySelector('.button-label').textContent='Ouvrir le tableau de bord'}}});
+    loadBranding();
+    $('#logout').addEventListener('click',()=>{location.reload()});
+  })();
+  </script>
+</body>
+</html>
