@@ -52,6 +52,30 @@ function ELIMU_reqToPromise(req) {
 }
 
 const ELIMU_Storage = {
+  async getParentSession() {
+    const persistent = await this.getMeta("parent_session");
+    if (persistent && persistent.token) return Object.assign({}, persistent, { persistent: true });
+    try {
+      const session = JSON.parse(sessionStorage.getItem(window.ELIMU_PARENT_SESSION_KEY || "elimu_parent_session") || "null");
+      return session && session.token ? Object.assign({}, session, { persistent: false }) : null;
+    } catch (_) { return null; }
+  },
+
+  async setParentSession(session, remember) {
+    if (remember) {
+      await this.setMeta("parent_session", { token: session.token, expiresAt: session.expiresAt });
+      try { sessionStorage.removeItem(window.ELIMU_PARENT_SESSION_KEY || "elimu_parent_session"); } catch (_) {}
+    } else {
+      try { sessionStorage.setItem(window.ELIMU_PARENT_SESSION_KEY || "elimu_parent_session", JSON.stringify(session)); } catch (_) {}
+      await this.delete("meta", "parent_session");
+    }
+  },
+
+  async clearParentSession() {
+    await this.delete("meta", "parent_session");
+    try { sessionStorage.removeItem(window.ELIMU_PARENT_SESSION_KEY || "elimu_parent_session"); } catch (_) {}
+  },
+
   async getAll(storeName) {
     const db = await ELIMU_openDb();
     const tx = db.transaction(storeName, "readonly");

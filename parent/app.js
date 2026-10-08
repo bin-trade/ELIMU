@@ -1,12 +1,13 @@
 // app.js — Parents
-// Le parent saisit son numéro; les données sont toujours relues en ligne depuis Apps Script.
+// Session parent persistante facultative, avec actualisation en ligne.
 
 const App = {
-  state: { phone: "", data: null, branding: {}, view: "login" },
+  state: { phone: "", data: null, branding: {}, view: "login", sessionToken: "", rememberDevice: false },
 
   async init() {
     document.addEventListener("click", (e) => { if (e.target.closest(".btn-sync")) this.refresh(); });
     await this.loadBranding();
+    await this.restoreSession();
     this.render();
     this.refreshStatusPill();
     window.addEventListener("offline", () => this.refreshStatusPill());
@@ -22,6 +23,24 @@ const App = {
     } catch (e) {
       // Le formulaire reste utilisable si l'identité distante est momentanément indisponible.
       this.state.branding = {};
+    }
+  },
+
+  async restoreSession() {
+    if (!navigator.onLine || !window.ELIMU_Storage) return;
+    try {
+      const saved = await ELIMU_Storage.getParentSession();
+      if (!saved || !saved.token) return;
+      const result = await ELIMU_Api.restoreParentSession(saved.token);
+      const data = this.normalizePayload(result && result.data ? result.data : result);
+      if (!data.enfants || !data.enfants.length) throw new Error("Session sans élève");
+      this.state.sessionToken = saved.token;
+      this.state.rememberDevice = Boolean(saved.persistent);
+      this.state.data = data;
+      this.state.view = "dashboard";
+      await this.notifyNewCommunique(data);
+    } catch (_) {
+      await ELIMU_Storage.clearParentSession();
     }
   },
 
@@ -124,6 +143,7 @@ const App = {
         <div id="login-err"></div>
         <label>Numero de telephone</label>
         <input id="phone-input" type="tel" placeholder="+243 8xx xxx xxx" value="${this.state.phone}">
+        <label class="remember-device"><input id="remember-device" type="checkbox" ${this.state.rememberDevice ? "checked" : ""}> Mémoriser cet appareil pendant 30 jours</label>
         <div class="form-actions">
           <button id="login-btn" onclick="App.login()"><span class="button-label">Se connecter</span><span class="button-spinner" aria-hidden="true"></span></button>
         </div>
@@ -139,11 +159,21 @@ const App = {
     btn.setAttribute("aria-busy", "true");
     btn.querySelector(".button-label").textContent = "Connexion en cours…";
     try {
-      const data = this.normalizePayload(await ELIMU_Api.call("parentLookup", { telephone: this.normalizePhone(phone) }));
+      const remember = Boolean(document.getElementById("remember-device")?.checked);
+      const session = await ELIMU_Api.createParentSession(this.normalizePhone(phone));
+      const data = this.normalizePayload(session && session.data ? session.data : session);
       if (!data || !data.enfants || !data.enfants.length) throw new Error("Aucun eleve trouve pour ce numero");
       this.state.phone = phone;
+      this.state.sessionToken = session.token || "";
+      this.state.rememberDevice = remember;
       this.state.data = data;
       this.state.view = "dashboard";
+      if (this.state.sessionToken) {
+        await ELIMU_Storage.setParentSession({
+          token: this.state.sessionToken,
+          expiresAt: Date.now() + Number(session.expiresIn || 0) * 1000
+        }, remember);
+      }
       await this.initialiseCommuniqueMarker(data);
       this.render();
     } catch (e) {
@@ -162,7 +192,11 @@ const App = {
     if (!navigator.onLine) { this.toast("Hors connexion"); return; }
     document.querySelectorAll(".btn-sync").forEach((b) => (b.disabled = true));
     try {
-      const data = this.normalizePayload(await ELIMU_Api.call("parentLookup", { telephone: this.normalizePhone(this.state.phone) }));
+      const result = this.state.sessionToken
+        ? await ELIMU_Api.restoreParentSession(this.state.sessionToken)
+        : await ELIMU_Api.createParentSession(this.normalizePhone(this.state.phone));
+      const data = this.normalizePayload(result && result.data ? result.data : result);
+      if (result && result.token) this.state.sessionToken = result.token;
       await this.notifyNewCommunique(data);
       this.state.data = data;
       this.render();
@@ -175,6 +209,11 @@ const App = {
   },
 
   logout() {
+    if (window.ELIMU_Storage) ELIMU_Storage.clearParentSession();
+    this.state.phone = "";
+    this.state.sessionToken = "";
+    this.state.rememberDevice = false;
+    this.state.data = null;
     this.state.view = "login";
     this.render();
   },

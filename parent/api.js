@@ -33,6 +33,14 @@ const ELIMU_Api = {
     return Object.prototype.hasOwnProperty.call(data, "result") ? data.result : data;
   },
 
+  async createParentSession(telephone) {
+    return this.call("parentSessionCreate", { telephone });
+  },
+
+  async restoreParentSession(token) {
+    return this.call("parentSessionLookup", { token });
+  },
+
   isOnline() {
     return navigator.onLine;
   }
