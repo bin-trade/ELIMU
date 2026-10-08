@@ -4,7 +4,7 @@ window.ELIMU_CONFIG = {
   appsScriptUrl: window.ELIMU_getCentralAppsScriptUrl(),
   schoolId: "",
   role: "PROFESSEUR",
-  configVersion: "2026-10-08-parent-session-2"
+  configVersion: "2026-10-08-parent-session-4"
 };
 
 const ELIMU_URL_STORAGE_KEY = "elimu_professeur_online_config";
